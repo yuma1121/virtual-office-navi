@@ -10,6 +10,14 @@ const categoryNames: Record<string, string> = {
   concern: 'お悩み解決',
 };
 
+const categoryDescriptions: Record<string, string> = {
+  comparison: 'バーチャルオフィスの料金・サービスを徹底比較。あなたに最適なサービスが見つかります。',
+  review: '実際に利用した体験をもとに、各バーチャルオフィスサービスを詳しくレビューします。',
+  area: '東京・大阪など主要エリアごとのおすすめバーチャルオフィスをご紹介します。',
+  howto: '法人登記や開業届など、バーチャルオフィス利用に必要な手続きを解説します。',
+  concern: 'バーチャルオフィスに関するよくある疑問や不安を解消します。',
+};
+
 const categoryColors: Record<string, string> = {
   comparison: 'bg-blue-500',
   review: 'bg-emerald-500',
@@ -30,6 +38,7 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 const categoryName = categoryNames[category!] || category;
+const categoryDescription = categoryDescriptions[category!] || '';
 
 const allPosts = await getCollection('blog');
 const posts = allPosts
@@ -41,22 +50,41 @@ const posts = allPosts
   title={`${categoryName} | バーチャルオフィスナビ`}
   description={`バーチャルオフィスの${categoryName}に関する記事一覧`}
 >
-  <section class="py-12">
+  <section class="py-12 sm:py-16">
     <div class="container-wide">
-      <h1 class="text-3xl font-bold mb-8">{categoryName}</h1>
+      <!-- Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-2 mb-3">
+          <a href="/" class="text-sm text-gray-400 hover:text-gray-900 transition-colors">ホーム</a>
+          <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-sm text-gray-600">{categoryName}</span>
+        </div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-md">
+            {categoryName}
+          </span>
+          <span class="text-sm text-gray-400">{posts.length}件の記事</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{categoryName}</h1>
+        {categoryDescription && (
+          <p class="text-gray-500 text-sm sm:text-base">{categoryDescription}</p>
+        )}
+      </div>
+
+      <!-- Posts Grid -->
       {posts.length > 0 ? (
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
             <a
               href={`/blog/${post.slug}`}
-              class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100"
+              class="group block bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-400 transition-colors"
             >
               <div class={`h-1 ${categoryColors[post.data.category] || 'bg-gray-300'}`}></div>
               <div class="p-5">
-                <h3 class="text-lg font-bold text-gray-800 leading-snug">
+                <h3 class="text-base font-semibold text-gray-900 leading-snug group-hover:text-gray-600 transition-colors">
                   {post.data.title}
                 </h3>
-                <p class="mt-2 text-sm text-gray-600 line-clamp-2">
+                <p class="mt-2 text-sm text-gray-500 line-clamp-2">
                   {post.data.description}
                 </p>
                 <time class="block mt-3 text-xs text-gray-400">
@@ -67,7 +95,9 @@ const posts = allPosts
           ))}
         </div>
       ) : (
-        <p class="text-gray-500">このカテゴリの記事はまだありません。</p>
+        <div class="text-center py-16 border border-gray-200 rounded-lg">
+          <p class="text-gray-400">このカテゴリの記事はまだありません。</p>
+        </div>
       )}
     </div>
   </section>

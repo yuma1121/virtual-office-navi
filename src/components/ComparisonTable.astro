@@ -25,13 +25,13 @@ function renderStars(rating: number): string {
 ---
 
 <div class="my-8">
-  <h3 class="text-xl font-bold text-navy mb-4">{title}</h3>
+  <h3 class="text-xl font-bold text-gray-900 mb-4">{title}</h3>
 
   <!-- Desktop Table -->
   <div class="hidden md:block overflow-x-auto">
     <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
       <thead>
-        <tr class="bg-navy text-white">
+        <tr class="bg-gray-900 text-white">
           <th class="px-4 py-3 text-left text-sm font-medium">サービス名</th>
           <th class="px-4 py-3 text-left text-sm font-medium">月額料金</th>
           <th class="px-4 py-3 text-left text-sm font-medium">主な特徴</th>
@@ -42,7 +42,7 @@ function renderStars(rating: number): string {
       <tbody>
         {services.map((service, index) => (
           <tr class={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
-            <td class="px-4 py-4 font-bold text-navy">{service.name}</td>
+            <td class="px-4 py-4 font-bold text-gray-900">{service.name}</td>
             <td class="px-4 py-4 text-lg font-bold text-primary-600">{service.price}</td>
             <td class="px-4 py-4">
               <ul class="space-y-1">
@@ -65,7 +65,7 @@ function renderStars(rating: number): string {
                 serviceName={service.name}
                 url={service.affiliateUrl}
                 ctaText="詳細を見る"
-                color="primary"
+                variant="default"
               />
             </td>
           </tr>
@@ -79,7 +79,7 @@ function renderStars(rating: number): string {
     {services.map((service, index) => (
       <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
         <div class="flex items-center justify-between mb-3">
-          <h4 class="font-bold text-navy text-lg">{service.name}</h4>
+          <h4 class="font-bold text-gray-900 text-lg">{service.name}</h4>
           <div class="text-accent text-sm" aria-label={`評価: ${service.rating}点`}>
             {renderStars(service.rating)}
           </div>

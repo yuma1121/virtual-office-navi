@@ -3,39 +3,31 @@ export interface Props {
   serviceName: string;
   url: string;
   ctaText?: string;
-  color?: 'primary' | 'accent' | 'green';
+  variant?: 'default' | 'outline';
 }
 
 const {
   serviceName,
   url,
   ctaText = '公式サイトを見る',
-  color = 'primary',
+  variant = 'default',
 } = Astro.props;
 
-const colorClasses: Record<string, string> = {
-  primary: 'bg-primary-600 hover:bg-primary-700 focus:ring-primary-300',
-  accent: 'bg-accent hover:bg-accent-dark focus:ring-amber-300',
-  green: 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-300',
-};
-
-const buttonClasses = colorClasses[color] || colorClasses.primary;
+const baseClasses = 'inline-flex flex-col items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:-translate-y-0.5';
+const variantClasses = variant === 'outline'
+  ? 'border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400'
+  : 'bg-gray-900 text-white hover:bg-gray-800 shadow-sm hover:shadow-md';
 ---
 
 <a
   href={url}
   target="_blank"
   rel="nofollow sponsored noopener noreferrer"
-  class:list={[
-    'inline-flex flex-col items-center justify-center',
-    'px-6 py-4 rounded-xl shadow-lg',
-    'text-white font-bold',
-    'transition-all duration-200',
-    'hover:shadow-xl hover:-translate-y-0.5',
-    'focus:outline-none focus:ring-4',
-    buttonClasses,
-  ]}
+  class:list={[baseClasses, variantClasses]}
 >
-  <span class="text-sm opacity-90">{serviceName}</span>
-  <span class="text-base mt-1">{ctaText}</span>
+  <span class="text-xs opacity-75">{serviceName}</span>
+  <span class="text-sm mt-0.5 flex items-center gap-1">
+    {ctaText}
+    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+  </span>
 </a>
