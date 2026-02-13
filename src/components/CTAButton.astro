@@ -1,0 +1,41 @@
+---
+export interface Props {
+  serviceName: string;
+  url: string;
+  ctaText?: string;
+  color?: 'primary' | 'accent' | 'green';
+}
+
+const {
+  serviceName,
+  url,
+  ctaText = '公式サイトを見る',
+  color = 'primary',
+} = Astro.props;
+
+const colorClasses: Record<string, string> = {
+  primary: 'bg-primary-600 hover:bg-primary-700 focus:ring-primary-300',
+  accent: 'bg-accent hover:bg-accent-dark focus:ring-amber-300',
+  green: 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-300',
+};
+
+const buttonClasses = colorClasses[color] || colorClasses.primary;
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="nofollow sponsored noopener noreferrer"
+  class:list={[
+    'inline-flex flex-col items-center justify-center',
+    'px-6 py-4 rounded-xl shadow-lg',
+    'text-white font-bold',
+    'transition-all duration-200',
+    'hover:shadow-xl hover:-translate-y-0.5',
+    'focus:outline-none focus:ring-4',
+    buttonClasses,
+  ]}
+>
+  <span class="text-sm opacity-90">{serviceName}</span>
+  <span class="text-base mt-1">{ctaText}</span>
+</a>

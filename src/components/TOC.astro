@@ -1,0 +1,75 @@
+---
+// Table of Contents component
+// Generates a TOC from h2/h3 headings via client-side JavaScript
+---
+
+<aside class="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-8" id="toc-container">
+  <div class="flex items-center justify-between mb-3">
+    <h2 class="text-base font-bold text-navy">目次</h2>
+    <button
+      id="toc-toggle"
+      class="text-sm text-primary-600 hover:text-primary-700 transition-colors"
+      aria-expanded="true"
+      aria-controls="toc-list"
+    >
+      閉じる
+    </button>
+  </div>
+  <nav id="toc-list" aria-label="記事の目次">
+    <ol class="space-y-1 text-sm list-none" id="toc-items">
+      <!-- TOC items are generated client-side -->
+    </ol>
+  </nav>
+</aside>
+
+<script>
+  function buildTOC() {
+    const article = document.querySelector('article');
+    const tocItems = document.getElementById('toc-items');
+    const tocContainer = document.getElementById('toc-container');
+
+    if (!article || !tocItems) return;
+
+    const headings = article.querySelectorAll('h2, h3');
+
+    if (headings.length === 0) {
+      tocContainer?.classList.add('hidden');
+      return;
+    }
+
+    headings.forEach((heading, index) => {
+      // Ensure heading has an id
+      if (!heading.id) {
+        heading.id = `heading-${index}`;
+      }
+
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${heading.id}`;
+      a.textContent = heading.textContent;
+      a.className =
+        'text-gray-600 hover:text-primary-600 transition-colors block py-1';
+
+      if (heading.tagName === 'H3') {
+        li.className = 'ml-4';
+        a.className += ' text-xs';
+      }
+
+      li.appendChild(a);
+      tocItems.appendChild(li);
+    });
+
+    // Toggle functionality
+    const toggleBtn = document.getElementById('toc-toggle');
+    const tocList = document.getElementById('toc-list');
+
+    toggleBtn?.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      toggleBtn.textContent = isExpanded ? '開く' : '閉じる';
+      tocList?.classList.toggle('hidden');
+    });
+  }
+
+  buildTOC();
+</script>

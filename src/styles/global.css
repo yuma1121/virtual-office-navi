@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold leading-tight;
+  }
+
+  article h2 {
+    @apply text-2xl mt-12 mb-4 pb-2 border-b-2 border-blue-600;
+  }
+
+  article h3 {
+    @apply text-xl mt-8 mb-3 pl-3 border-l-4 border-blue-400;
+  }
+
+  article p {
+    @apply mb-4 leading-relaxed text-gray-700;
+  }
+
+  article ul, article ol {
+    @apply mb-4 pl-6;
+  }
+
+  article ul {
+    @apply list-disc;
+  }
+
+  article ol {
+    @apply list-decimal;
+  }
+
+  article li {
+    @apply mb-2 leading-relaxed;
+  }
+
+  article a {
+    @apply text-blue-600 hover:text-blue-800 underline;
+  }
+
+  article table {
+    @apply w-full border-collapse mb-6;
+  }
+
+  article th {
+    @apply bg-blue-50 border border-gray-300 px-4 py-2 text-left font-bold;
+  }
+
+  article td {
+    @apply border border-gray-300 px-4 py-2;
+  }
+
+  article blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic text-gray-600 my-4;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-4;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto px-4;
+  }
+}

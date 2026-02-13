@@ -1,0 +1,107 @@
+---
+import CTAButton from './CTAButton.astro';
+
+export interface Service {
+  name: string;
+  price: string;
+  features: string[];
+  rating: number;
+  affiliateUrl: string;
+}
+
+export interface Props {
+  services: Service[];
+  title?: string;
+}
+
+const { services, title = 'バーチャルオフィス比較表' } = Astro.props;
+
+function renderStars(rating: number): string {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 >= 0.5 ? 1 : 0;
+  const emptyStars = 5 - fullStars - halfStar;
+  return '★'.repeat(fullStars) + (halfStar ? '☆' : '') + '☆'.repeat(emptyStars);
+}
+---
+
+<div class="my-8">
+  <h3 class="text-xl font-bold text-navy mb-4">{title}</h3>
+
+  <!-- Desktop Table -->
+  <div class="hidden md:block overflow-x-auto">
+    <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm border border-gray-200">
+      <thead>
+        <tr class="bg-navy text-white">
+          <th class="px-4 py-3 text-left text-sm font-medium">サービス名</th>
+          <th class="px-4 py-3 text-left text-sm font-medium">月額料金</th>
+          <th class="px-4 py-3 text-left text-sm font-medium">主な特徴</th>
+          <th class="px-4 py-3 text-center text-sm font-medium">評価</th>
+          <th class="px-4 py-3 text-center text-sm font-medium">詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+        {services.map((service, index) => (
+          <tr class={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+            <td class="px-4 py-4 font-bold text-navy">{service.name}</td>
+            <td class="px-4 py-4 text-lg font-bold text-primary-600">{service.price}</td>
+            <td class="px-4 py-4">
+              <ul class="space-y-1">
+                {service.features.map((feature) => (
+                  <li class="text-sm text-gray-600 flex items-start gap-1">
+                    <span class="text-primary-500 mt-0.5 shrink-0">&#10003;</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </td>
+            <td class="px-4 py-4 text-center">
+              <div class="text-accent text-lg" aria-label={`評価: ${service.rating}点`}>
+                {renderStars(service.rating)}
+              </div>
+              <span class="text-sm text-gray-500">{service.rating}/5.0</span>
+            </td>
+            <td class="px-4 py-4 text-center">
+              <CTAButton
+                serviceName={service.name}
+                url={service.affiliateUrl}
+                ctaText="詳細を見る"
+                color="primary"
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Cards -->
+  <div class="md:hidden space-y-4">
+    {services.map((service, index) => (
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-bold text-navy text-lg">{service.name}</h4>
+          <div class="text-accent text-sm" aria-label={`評価: ${service.rating}点`}>
+            {renderStars(service.rating)}
+          </div>
+        </div>
+        <p class="text-2xl font-bold text-primary-600 mb-3">{service.price}</p>
+        <ul class="space-y-1 mb-4">
+          {service.features.map((feature) => (
+            <li class="text-sm text-gray-600 flex items-start gap-1">
+              <span class="text-primary-500 mt-0.5 shrink-0">&#10003;</span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <div class="text-center">
+          <CTAButton
+            serviceName={service.name}
+            url={service.affiliateUrl}
+            ctaText="詳細を見る"
+            color="primary"
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

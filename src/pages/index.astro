@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 10);
+
+const categories = [
+  { slug: 'comparison', name: '比較・ランキング', icon: '📊' },
+  { slug: 'review', name: 'サービスレビュー', icon: '⭐' },
+  { slug: 'area', name: 'エリア別おすすめ', icon: '📍' },
+  { slug: 'howto', name: '使い方・手続き', icon: '📝' },
+  { slug: 'concern', name: 'お悩み解決', icon: '💡' },
+];
+---
+
+<BaseLayout
+  title="バーチャルオフィスナビ | フリーランス・個人事業主のためのバーチャルオフィス徹底比較"
+  description="バーチャルオフィスの料金・サービスを徹底比較。GMOオフィスサポート、レゾナンス、NAWABARI等の口コミ・評判をフリーランスが実体験ベースでレビュー。"
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-700 to-blue-900 text-white py-16 md:py-24">
+    <div class="container-narrow text-center">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">
+        バーチャルオフィスナビ
+      </h1>
+      <p class="text-lg md:text-xl opacity-90 mb-8">
+        フリーランス・個人事業主のための<br class="md:hidden" />バーチャルオフィス徹底比較
+      </p>
+      <p class="text-sm opacity-75 mb-8">
+        実際にGMOオフィスサポートを利用中の筆者が、主要サービスを徹底比較します
+      </p>
+      <a
+        href="#recent-posts"
+        class="inline-block bg-white text-blue-700 font-bold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors"
+      >
+        記事を読む
+      </a>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="py-12 bg-gray-50">
+    <div class="container-wide">
+      <h2 class="text-2xl font-bold text-center mb-8">カテゴリから探す</h2>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        {categories.map((cat) => (
+          <a
+            href={`/category/${cat.slug}`}
+            class="bg-white rounded-lg p-4 text-center shadow-sm hover:shadow-md transition-shadow"
+          >
+            <span class="text-2xl block mb-2">{cat.icon}</span>
+            <span class="text-sm font-medium text-gray-700">{cat.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Posts -->
+  <section id="recent-posts" class="py-12">
+    <div class="container-wide">
+      <h2 class="text-2xl font-bold mb-8">最新記事</h2>
+      {recentPosts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recentPosts.map((post) => (
+            <a
+              href={`/blog/${post.slug}`}
+              class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100"
+            >
+              <div class="p-5">
+                <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                  {categories.find(c => c.slug === post.data.category)?.name || post.data.category}
+                </span>
+                <h3 class="mt-3 text-lg font-bold text-gray-800 leading-snug">
+                  {post.data.title}
+                </h3>
+                <p class="mt-2 text-sm text-gray-600 line-clamp-2">
+                  {post.data.description}
+                </p>
+                <time class="block mt-3 text-xs text-gray-400">
+                  {post.data.pubDate.toLocaleDateString('ja-JP')}
+                </time>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="text-gray-500">記事を準備中です。</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

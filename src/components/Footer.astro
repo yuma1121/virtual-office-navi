@@ -1,0 +1,59 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-navy text-gray-300">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- About -->
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">バーチャルオフィスナビ</h3>
+        <p class="text-sm leading-relaxed">
+          フリーランス・個人事業主・起業家のためのバーチャルオフィス情報サイトです。
+          各サービスの料金・機能・口コミを徹底比較し、あなたに最適なバーチャルオフィス選びをサポートします。
+        </p>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">カテゴリー</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/category/comparison" class="hover:text-white transition-colors">おすすめ比較</a></li>
+          <li><a href="/category/review" class="hover:text-white transition-colors">レビュー</a></li>
+          <li><a href="/category/howto" class="hover:text-white transition-colors">使い方・手続き</a></li>
+          <li><a href="/category/area" class="hover:text-white transition-colors">エリア情報</a></li>
+          <li><a href="/category/concern" class="hover:text-white transition-colors">お悩み解決</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal & Info -->
+      <div>
+        <h3 class="text-white font-bold text-lg mb-4">サイト情報</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="/about" class="hover:text-white transition-colors">運営者情報</a></li>
+          <li><a href="/privacy" class="hover:text-white transition-colors">プライバシーポリシー</a></li>
+          <li><a href="/disclaimer" class="hover:text-white transition-colors">免責事項</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="border-t border-gray-600 mt-8 pt-8">
+      <p class="text-xs text-gray-400 leading-relaxed mb-4">
+        ※ 当サイトはアフィリエイトプログラムに参加しています。記事内のリンクを経由してサービスに申し込まれた場合、当サイトが紹介料を受け取ることがあります。
+        なお、紹介料の有無がサービスの評価・ランキングに影響することはありません。
+      </p>
+      <p class="text-xs text-gray-400 leading-relaxed">
+        ※ 掲載情報は記事執筆時点のものです。最新の情報は各サービスの公式サイトでご確認ください。
+      </p>
+    </div>
+
+    <!-- Copyright -->
+    <div class="border-t border-gray-600 mt-8 pt-6 text-center">
+      <p class="text-sm text-gray-400">
+        &copy; {currentYear} バーチャルオフィスナビ All Rights Reserved.
+      </p>
+    </div>
+  </div>
+</footer>
