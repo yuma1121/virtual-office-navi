@@ -15,6 +15,14 @@ const categories = [
   { slug: 'howto', name: '使い方・手続き', icon: '📝' },
   { slug: 'concern', name: 'お悩み解決', icon: '💡' },
 ];
+
+const categoryColors: Record<string, string> = {
+  comparison: 'bg-blue-500',
+  review: 'bg-emerald-500',
+  howto: 'bg-purple-500',
+  area: 'bg-orange-500',
+  concern: 'bg-rose-500',
+};
 ---
 
 <BaseLayout
@@ -34,11 +42,28 @@ const categories = [
         実際にGMOオフィスサポートを利用中の筆者が、主要サービスを徹底比較します
       </p>
       <a
-        href="#recent-posts"
+        href="/blog/virtual-office-osusume"
         class="inline-block bg-white text-blue-700 font-bold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors"
       >
-        記事を読む
+        おすすめ比較を見る
       </a>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
+        <div class="bg-white/10 backdrop-blur rounded-lg p-5">
+          <div class="text-2xl mb-2">✓</div>
+          <h3 class="font-bold mb-1">実体験ベース</h3>
+          <p class="text-sm opacity-80">GMOオフィスサポートを実際に利用中の筆者が徹底解説</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur rounded-lg p-5">
+          <div class="text-2xl mb-2">📊</div>
+          <h3 class="font-bold mb-1">10社以上を比較</h3>
+          <p class="text-sm opacity-80">料金・機能・口コミを多角的に分析</p>
+        </div>
+        <div class="bg-white/10 backdrop-blur rounded-lg p-5">
+          <div class="text-2xl mb-2">🎯</div>
+          <h3 class="font-bold mb-1">目的別に提案</h3>
+          <p class="text-sm opacity-80">フリーランス・法人登記・ネットショップなど用途に合わせて</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -71,6 +96,7 @@ const categories = [
               href={`/blog/${post.slug}`}
               class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100"
             >
+              <div class={`h-1 ${categoryColors[post.data.category] || 'bg-gray-300'}`}></div>
               <div class="p-5">
                 <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded">
                   {categories.find(c => c.slug === post.data.category)?.name || post.data.category}

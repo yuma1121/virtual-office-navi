@@ -10,6 +10,14 @@ const categoryNames: Record<string, string> = {
   concern: 'お悩み解決',
 };
 
+const categoryColors: Record<string, string> = {
+  comparison: 'bg-blue-500',
+  review: 'bg-emerald-500',
+  howto: 'bg-purple-500',
+  area: 'bg-orange-500',
+  concern: 'bg-rose-500',
+};
+
 export async function getStaticPaths() {
   return Object.keys({
     comparison: true,
@@ -43,6 +51,7 @@ const posts = allPosts
               href={`/blog/${post.slug}`}
               class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100"
             >
+              <div class={`h-1 ${categoryColors[post.data.category] || 'bg-gray-300'}`}></div>
               <div class="p-5">
                 <h3 class="text-lg font-bold text-gray-800 leading-snug">
                   {post.data.title}

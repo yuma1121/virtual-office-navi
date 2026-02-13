@@ -2,7 +2,10 @@
 import SEOHead from '../components/SEOHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
 import '../styles/global.css';
+
+const gaId = import.meta.env.PUBLIC_GA_ID;
 
 export interface Props {
   title: string;
@@ -12,9 +15,10 @@ export interface Props {
   pubDate?: Date;
   updatedDate?: Date;
   isArticle?: boolean;
+  breadcrumbs?: { name: string; url: string }[];
 }
 
-const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArticle } = Astro.props;
+const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArticle, breadcrumbs } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,6 +28,7 @@ const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArtic
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Google Fonts: Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,18 +46,18 @@ const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArtic
       pubDate={pubDate}
       updatedDate={updatedDate}
       isArticle={isArticle}
+      breadcrumbs={breadcrumbs}
     />
 
-    <!-- Google Analytics (uncomment and replace GA_MEASUREMENT_ID) -->
-    <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    -->
+    {gaId && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+      <script define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gaId);
+      </script>
+    )}
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-800 font-sans">
     <Header />
@@ -60,5 +65,6 @@ const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArtic
       <slot />
     </main>
     <Footer />
+    <ScrollToTop />
   </body>
 </html>
