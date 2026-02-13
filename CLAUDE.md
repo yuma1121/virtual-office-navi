@@ -3,7 +3,7 @@
 ## プロジェクト概要
 
 バーチャルオフィス特化のアフィリエイトサイト。Astro + Tailwind CSS で構築。
-サイトURL: https://virtual-office-navi.com (Vercelでホスティング)
+サイトURL: https://virtual-office.site (Vercelでホスティング)
 GitHub: https://github.com/yuma1121/virtual-office-navi
 
 ## 技術スタック

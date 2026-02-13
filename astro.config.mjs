@@ -4,9 +4,9 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://virtual-office-navi.com',
+  site: 'https://virtual-office.site',
   integrations: [
-    // sitemap(), // TODO: Re-enable after deploying to real domain
+    sitemap(),
     tailwind(),
   ],
   markdown: {
