@@ -11,7 +11,8 @@ const categoryNames: Record<string, string> = {
 };
 
 const categoryDescriptions: Record<string, string> = {
-  comparison: 'バーチャルオフィスの料金・サービスを徹底比較。あなたに最適なサービスが見つかります。',
+  comparison:
+    'バーチャルオフィスの料金・サービスを徹底比較。あなたに最適なサービスが見つかります。',
   review: '実際に利用した体験をもとに、各バーチャルオフィスサービスを詳しくレビューします。',
   area: '東京・大阪など主要エリアごとのおすすめバーチャルオフィスをご紹介します。',
   howto: '法人登記や開業届など、バーチャルオフィス利用に必要な手続きを解説します。',
@@ -55,50 +56,61 @@ const posts = allPosts
       <!-- Header -->
       <div class="mb-10">
         <div class="flex items-center gap-2 mb-3">
-          <a href="/" class="text-sm text-gray-400 hover:text-gray-900 transition-colors">ホーム</a>
-          <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <a href="/" class="text-sm text-gray-400 hover:text-blue-600 transition-colors">ホーム</a>
+          <svg
+            class="w-3.5 h-3.5 text-gray-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+            ></path></svg
+          >
           <span class="text-sm text-gray-600">{categoryName}</span>
         </div>
         <div class="flex items-center gap-3 mb-2">
-          <span class="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-md">
+          <span
+            class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-md"
+          >
             {categoryName}
           </span>
           <span class="text-sm text-gray-400">{posts.length}件の記事</span>
         </div>
         <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{categoryName}</h1>
-        {categoryDescription && (
-          <p class="text-gray-500 text-sm sm:text-base">{categoryDescription}</p>
-        )}
+        {
+          categoryDescription && (
+            <p class="text-gray-500 text-sm sm:text-base">{categoryDescription}</p>
+          )
+        }
       </div>
 
       <!-- Posts Grid -->
-      {posts.length > 0 ? (
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <a
-              href={`/blog/${post.slug}`}
-              class="group block bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-gray-400 transition-colors"
-            >
-              <div class={`h-1 ${categoryColors[post.data.category] || 'bg-gray-300'}`}></div>
-              <div class="p-5">
-                <h3 class="text-base font-semibold text-gray-900 leading-snug group-hover:text-gray-600 transition-colors">
-                  {post.data.title}
-                </h3>
-                <p class="mt-2 text-sm text-gray-500 line-clamp-2">
-                  {post.data.description}
-                </p>
-                <time class="block mt-3 text-xs text-gray-400">
-                  {post.data.pubDate.toLocaleDateString('ja-JP')}
-                </time>
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <div class="text-center py-16 border border-gray-200 rounded-lg">
-          <p class="text-gray-400">このカテゴリの記事はまだありません。</p>
-        </div>
-      )}
+      {
+        posts.length > 0 ? (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post) => (
+              <a
+                href={`/blog/${post.slug}`}
+                class="group block bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-blue-300 hover:shadow-sm transition-all"
+              >
+                <div class={`h-1 ${categoryColors[post.data.category] || 'bg-gray-300'}`} />
+                <div class="p-5">
+                  <h3 class="text-base font-semibold text-gray-900 leading-snug group-hover:text-blue-600 transition-colors">
+                    {post.data.title}
+                  </h3>
+                  <p class="mt-2 text-sm text-gray-500 line-clamp-2">{post.data.description}</p>
+                  <time class="block mt-3 text-xs text-gray-400">
+                    {post.data.pubDate.toLocaleDateString('ja-JP')}
+                  </time>
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-16 border border-gray-200 rounded-lg">
+            <p class="text-gray-400">このカテゴリの記事はまだありません。</p>
+          </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>

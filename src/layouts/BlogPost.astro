@@ -16,8 +16,17 @@ export interface Props {
   slug: string;
 }
 
-const { title, description, pubDate, updatedDate, heroImage, affiliateLinks, category, tags, slug } =
-  Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  affiliateLinks,
+  category,
+  tags,
+  slug,
+} = Astro.props;
 
 const categoryLabels: Record<string, string> = {
   comparison: '比較',
@@ -47,17 +56,31 @@ const breadcrumbs = [
     <!-- Breadcrumb -->
     <nav class="text-sm text-gray-400 mb-6" aria-label="パンくずリスト">
       <ol class="flex items-center gap-1.5">
-        <li><a href="/" class="hover:text-gray-900 transition-colors">ホーム</a></li>
+        <li><a href="/" class="hover:text-blue-600 transition-colors">ホーム</a></li>
         <li>
-          <svg class="w-3.5 h-3.5 inline text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <svg
+            class="w-3.5 h-3.5 inline text-gray-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+            ></path></svg
+          >
         </li>
         <li>
-          <a href={`/category/${category}`} class="hover:text-gray-900 transition-colors">
+          <a href={`/category/${category}`} class="hover:text-blue-600 transition-colors">
             {categoryLabels[category] || category}
           </a>
         </li>
         <li>
-          <svg class="w-3.5 h-3.5 inline text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <svg
+            class="w-3.5 h-3.5 inline text-gray-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+            ></path></svg
+          >
         </li>
         <li class="text-gray-600 truncate max-w-[200px]">{title}</li>
       </ol>
@@ -66,7 +89,9 @@ const breadcrumbs = [
     <!-- Article Header -->
     <header class="mb-8">
       <div class="flex items-center gap-2 mb-3">
-        <span class="inline-block bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-1 rounded-md">
+        <span
+          class="inline-block bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-md"
+        >
           {categoryLabels[category] || category}
         </span>
       </div>
@@ -75,32 +100,55 @@ const breadcrumbs = [
       </h1>
       <div class="flex items-center gap-3 text-sm text-gray-400">
         <div class="flex items-center gap-1">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path></svg
+          >
           <time datetime={pubDate.toISOString()}>
-            {pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {
+              pubDate.toLocaleDateString('ja-JP', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })
+            }
           </time>
         </div>
-        {updatedDate && (
-          <div class="flex items-center gap-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            <time datetime={updatedDate.toISOString()}>
-              {updatedDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </time>
-          </div>
-        )}
+        {
+          updatedDate && (
+            <div class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              <time datetime={updatedDate.toISOString()}>
+                {updatedDate.toLocaleDateString('ja-JP', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+            </div>
+          )
+        }
       </div>
     </header>
 
-    {heroImage && (
-      <div class="mb-8 rounded-lg overflow-hidden border border-gray-200">
-        <img
-          src={heroImage}
-          alt={title}
-          class="w-full h-auto object-cover"
-          loading="lazy"
-        />
-      </div>
-    )}
+    {
+      heroImage && (
+        <div class="mb-8 rounded-lg overflow-hidden border border-gray-200">
+          <img src={heroImage} alt={title} class="w-full h-auto object-cover" loading="lazy" />
+        </div>
+      )
+    }
 
     <!-- Table of Contents -->
     <TOC />
@@ -111,34 +159,34 @@ const breadcrumbs = [
     </div>
 
     <!-- Affiliate CTA Section -->
-    {affiliateLinks && affiliateLinks.length > 0 && (
-      <aside class="border border-gray-200 rounded-lg p-6 sm:p-8 mb-12 bg-gray-50">
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">おすすめバーチャルオフィス</h2>
-        <p class="text-sm text-gray-500 mb-6">この記事で紹介したサービスの詳細はこちらからご確認いただけます。</p>
-        <div class="flex flex-col sm:flex-row gap-3">
-          {affiliateLinks.map((link) => (
-            <CTAButton
-              serviceName={link.name}
-              url={link.url}
-              ctaText={link.cta}
-            />
-          ))}
-        </div>
-      </aside>
-    )}
+    {
+      affiliateLinks && affiliateLinks.length > 0 && (
+        <aside class="border border-blue-100 rounded-lg p-6 sm:p-8 mb-12 bg-blue-50/50">
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">おすすめバーチャルオフィス</h2>
+          <p class="text-sm text-gray-500 mb-6">
+            この記事で紹介したサービスの詳細はこちらからご確認いただけます。
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            {affiliateLinks.map((link) => (
+              <CTAButton serviceName={link.name} url={link.url} ctaText={link.cta} />
+            ))}
+          </div>
+        </aside>
+      )
+    }
 
     <!-- Tags -->
-    {tags.length > 0 && (
-      <div class="border-t pt-6">
-        <div class="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span class="bg-gray-100 text-gray-500 text-xs px-2.5 py-1 rounded-md">
-              #{tag}
-            </span>
-          ))}
+    {
+      tags.length > 0 && (
+        <div class="border-t pt-6">
+          <div class="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span class="bg-gray-100 text-gray-500 text-xs px-2.5 py-1 rounded-md">#{tag}</span>
+            ))}
+          </div>
         </div>
-      </div>
-    )}
+      )
+    }
 
     <!-- Related Posts -->
     <RelatedPosts category={category} currentSlug={slug} />

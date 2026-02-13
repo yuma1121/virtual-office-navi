@@ -18,7 +18,8 @@ export interface Props {
   breadcrumbs?: { name: string; url: string }[];
 }
 
-const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArticle, breadcrumbs } = Astro.props;
+const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArticle, breadcrumbs } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -49,15 +50,15 @@ const { title, description, ogImage, canonicalUrl, pubDate, updatedDate, isArtic
       breadcrumbs={breadcrumbs}
     />
 
-    {gaId && (
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-      <script define:vars={{ gaId }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', gaId);
-      </script>
-    )}
+    {gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />}
+    {
+      gaId && (
+        <script
+          is:inline
+          set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
+        />
+      )
+    }
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-800 font-sans">
     <Header />

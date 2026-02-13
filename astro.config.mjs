@@ -5,10 +5,7 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://virtual-office.site',
-  integrations: [
-    sitemap(),
-    tailwind(),
-  ],
+  integrations: [sitemap(), tailwind()],
   markdown: {
     shikiConfig: {
       theme: 'github-light',

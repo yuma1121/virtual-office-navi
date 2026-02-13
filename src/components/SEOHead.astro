@@ -27,23 +27,24 @@ const resolvedCanonical = canonicalUrl || Astro.url.href;
 const resolvedOgImage = new URL(ogImage, Astro.site).href;
 
 // BreadcrumbList JSON-LD
-const breadcrumbJsonLd = breadcrumbs && breadcrumbs.length > 0
-  ? {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: breadcrumbs.map((crumb, index) => {
-        const item: Record<string, string | number> = {
-          '@type': 'ListItem',
-          position: index + 1,
-          name: crumb.name,
-        };
-        if (crumb.url) {
-          item.item = new URL(crumb.url, Astro.site).href;
-        }
-        return item;
-      }),
-    }
-  : null;
+const breadcrumbJsonLd =
+  breadcrumbs && breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((crumb, index) => {
+          const item: Record<string, string | number> = {
+            '@type': 'ListItem',
+            position: index + 1,
+            name: crumb.name,
+          };
+          if (crumb.url) {
+            item.item = new URL(crumb.url, Astro.site).href;
+          }
+          return item;
+        }),
+      }
+    : null;
 
 // JSON-LD structured data
 const jsonLd = isArticle
@@ -103,16 +104,18 @@ const jsonLd = isArticle
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={resolvedOgImage} />
 
-{isArticle && pubDate && (
-  <meta property="article:published_time" content={pubDate.toISOString()} />
-)}
-{isArticle && updatedDate && (
-  <meta property="article:modified_time" content={updatedDate.toISOString()} />
-)}
+{isArticle && pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
+{
+  isArticle && updatedDate && (
+    <meta property="article:modified_time" content={updatedDate.toISOString()} />
+  )
+}
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-{breadcrumbJsonLd && (
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
-)}
+{
+  breadcrumbJsonLd && (
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  )
+}
