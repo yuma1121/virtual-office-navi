@@ -13,7 +13,7 @@ export interface Props {
 const {
   title,
   description,
-  ogImage = '/og-default.png',
+  ogImage = '/images/common/vo-hikaku-no-image-eyecatch.png',
   canonicalUrl,
   pubDate,
   updatedDate,
@@ -21,7 +21,7 @@ const {
   breadcrumbs,
 } = Astro.props;
 
-const siteName = 'バーチャルオフィスナビ';
+const siteName = 'バーチャルオフィスおすすめ比較ナビ';
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const resolvedCanonical = canonicalUrl || Astro.url.href;
 const resolvedOgImage = new URL(ogImage, Astro.site).href;
@@ -65,7 +65,7 @@ const jsonLd = isArticle
         name: siteName,
         logo: {
           '@type': 'ImageObject',
-          url: new URL('/logo.png', Astro.site).href,
+          url: new URL('/images/common/vo-hikaku-main-logo.png', Astro.site).href,
         },
       },
       mainEntityOfPage: {
