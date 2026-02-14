@@ -50,10 +50,14 @@ const services = [
     <!-- Hero Section -->
     <section class="relative bg-gray-900 overflow-hidden flex-1 flex items-center">
       <img
-        src="/images/common/hero-section-image.png"
+        src="/images/common/hero-section-image.webp"
         alt=""
         class="absolute inset-0 w-full h-full object-cover opacity-30"
         loading="eager"
+        fetchpriority="high"
+        width="1280"
+        height="720"
+        decoding="async"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
       <div class="relative container-wide w-full">
