@@ -21,7 +21,7 @@ const {
   breadcrumbs,
 } = Astro.props;
 
-const siteName = 'バーチャルオフィス比較ナビ';
+const siteName = 'バーチャルオフィスおすすめ比較ナビ';
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const resolvedCanonical = canonicalUrl || Astro.url.href;
 const resolvedOgImage = new URL(ogImage, Astro.site).href;
