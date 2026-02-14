@@ -1,17 +1,18 @@
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
 
+// 静的ページ: lastmod はページ作成・更新日を正確に記載
 const staticPages = [
-  { path: '/', priority: '1.0', changefreq: 'daily' },
-  { path: '/about/', priority: '0.5', changefreq: 'monthly' },
-  { path: '/privacy/', priority: '0.3', changefreq: 'yearly' },
-  { path: '/disclaimer/', priority: '0.3', changefreq: 'yearly' },
-  { path: '/contact/', priority: '0.5', changefreq: 'monthly' },
-  { path: '/category/comparison/', priority: '0.7', changefreq: 'weekly' },
-  { path: '/category/review/', priority: '0.7', changefreq: 'weekly' },
-  { path: '/category/area/', priority: '0.7', changefreq: 'weekly' },
-  { path: '/category/howto/', priority: '0.7', changefreq: 'weekly' },
-  { path: '/category/concern/', priority: '0.7', changefreq: 'weekly' },
+  { path: '/', lastmod: '2026-02-14' },
+  { path: '/about/', lastmod: '2026-02-14' },
+  { path: '/privacy/', lastmod: '2026-02-14' },
+  { path: '/disclaimer/', lastmod: '2026-02-14' },
+  { path: '/contact/', lastmod: '2026-02-14' },
+  { path: '/category/comparison/', lastmod: '2026-02-14' },
+  { path: '/category/review/', lastmod: '2026-02-14' },
+  { path: '/category/area/', lastmod: '2026-02-14' },
+  { path: '/category/howto/', lastmod: '2026-02-14' },
+  { path: '/category/concern/', lastmod: '2026-02-14' },
 ];
 
 export async function GET(context: APIContext) {
@@ -21,8 +22,7 @@ export async function GET(context: APIContext) {
   const urls = staticPages.map(
     (page) => `  <url>
     <loc>${site}${page.path}</loc>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
+    <lastmod>${page.lastmod}</lastmod>
   </url>`
   );
 
@@ -33,8 +33,6 @@ export async function GET(context: APIContext) {
       return `  <url>
     <loc>${site}/blog/${post.slug}/</loc>
     <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>`;
     });
 
