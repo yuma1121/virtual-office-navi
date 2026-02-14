@@ -109,53 +109,175 @@ const services = [
   </div>
 
   <!-- Diagnosis Section -->
-  <section id="diagnosis" class="py-10 md:py-14 bg-blue-50/50">
+  <section id="diagnosis" class="py-10 md:py-14 bg-gradient-to-b from-blue-50/80 to-white">
     <div class="container-wide">
-      <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">あなたにぴったりのバーチャルオフィスは？</h2>
-        <p class="text-sm text-gray-500 mb-6">3つの質問に答えるだけで、最適なサービスをご提案します。</p>
-        <div id="diagnosis-app" class="bg-white rounded-lg border border-gray-200 p-6 md:p-8">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-6">
+          <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-3">無料診断</span>
+          <h2 class="text-xl font-bold text-gray-900 mb-2">あなたにぴったりのバーチャルオフィスは？</h2>
+          <p class="text-sm text-gray-500">3つの質問に答えるだけで、最適なサービスをご提案します</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="flex items-center justify-center mb-6" id="diagnosis-progress">
+          <div class="progress-dot active" data-dot="1"><span>1</span></div>
+          <div class="progress-line" data-line="1"></div>
+          <div class="progress-dot" data-dot="2"><span>2</span></div>
+          <div class="progress-line" data-line="2"></div>
+          <div class="progress-dot" data-dot="3"><span>3</span></div>
+        </div>
+
+        <div id="diagnosis-app" class="bg-white rounded-2xl border border-gray-200 shadow-lg p-6 md:p-8 overflow-hidden">
           <div id="diagnosis-questions">
             <!-- Q1 -->
             <div class="diagnosis-step" data-step="1">
-              <p class="text-sm text-blue-600 font-medium mb-1">Q1 / 3</p>
-              <p class="font-semibold text-gray-900 mb-4">主な利用目的は？</p>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <button class="diagnosis-btn" data-q="purpose" data-v="registration">法人登記・開業届の住所</button>
-                <button class="diagnosis-btn" data-q="purpose" data-v="privacy">自宅住所を隠したい</button>
-                <button class="diagnosis-btn" data-q="purpose" data-v="branding">都心一等地の住所が欲しい</button>
-                <button class="diagnosis-btn" data-q="purpose" data-v="all">総合的に使いたい</button>
+              <div class="text-center mb-5">
+                <p class="text-sm text-blue-600 font-semibold mb-1">STEP 1 / 3</p>
+                <p class="text-lg font-bold text-gray-900">主な利用目的は？</p>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button class="diagnosis-card" data-q="purpose" data-v="registration">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">法人登記・開業届</span>
+                    <span class="diagnosis-card-desc">登記や届出に使える住所が必要</span>
+                  </div>
+                </button>
+                <button class="diagnosis-card" data-q="purpose" data-v="privacy">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">自宅住所を隠したい</span>
+                    <span class="diagnosis-card-desc">プライバシー保護が最優先</span>
+                  </div>
+                </button>
+                <button class="diagnosis-card" data-q="purpose" data-v="branding">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">一等地の住所が欲しい</span>
+                    <span class="diagnosis-card-desc">ブランド力・信頼感を高めたい</span>
+                  </div>
+                </button>
+                <button class="diagnosis-card" data-q="purpose" data-v="all">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">総合的に使いたい</span>
+                    <span class="diagnosis-card-desc">住所＋郵便転送＋電話など</span>
+                  </div>
+                </button>
               </div>
             </div>
             <!-- Q2 -->
             <div class="diagnosis-step hidden" data-step="2">
-              <p class="text-sm text-blue-600 font-medium mb-1">Q2 / 3</p>
-              <p class="font-semibold text-gray-900 mb-4">月額予算は？</p>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <button class="diagnosis-btn" data-q="budget" data-v="low">〜1,000円</button>
-                <button class="diagnosis-btn" data-q="budget" data-v="mid">1,000〜3,000円</button>
-                <button class="diagnosis-btn" data-q="budget" data-v="high">3,000円〜</button>
+              <div class="text-center mb-5">
+                <p class="text-sm text-blue-600 font-semibold mb-1">STEP 2 / 3</p>
+                <p class="text-lg font-bold text-gray-900">月額予算は？</p>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button class="diagnosis-card" data-q="budget" data-v="low">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">〜1,000円</span>
+                    <span class="diagnosis-card-desc">とにかくコストを抑えたい</span>
+                  </div>
+                </button>
+                <button class="diagnosis-card" data-q="budget" data-v="mid">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">1,000〜3,000円</span>
+                    <span class="diagnosis-card-desc">コスパと品質のバランス重視</span>
+                  </div>
+                </button>
+                <button class="diagnosis-card" data-q="budget" data-v="high">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">3,000円〜</span>
+                    <span class="diagnosis-card-desc">機能・サポート重視</span>
+                  </div>
+                </button>
               </div>
             </div>
             <!-- Q3 -->
             <div class="diagnosis-step hidden" data-step="3">
-              <p class="text-sm text-blue-600 font-medium mb-1">Q3 / 3</p>
-              <p class="font-semibold text-gray-900 mb-4">郵便物の転送は必要？</p>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <button class="diagnosis-btn" data-q="mail" data-v="yes">必要</button>
-                <button class="diagnosis-btn" data-q="mail" data-v="no">不要</button>
+              <div class="text-center mb-5">
+                <p class="text-sm text-blue-600 font-semibold mb-1">STEP 3 / 3</p>
+                <p class="text-lg font-bold text-gray-900">郵便物の転送は必要？</p>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button class="diagnosis-card" data-q="mail" data-v="yes">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">必要</span>
+                    <span class="diagnosis-card-desc">届いた郵便物を自宅に転送してほしい</span>
+                  </div>
+                </button>
+                <button class="diagnosis-card" data-q="mail" data-v="no">
+                  <div class="diagnosis-card-icon">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" /></svg>
+                  </div>
+                  <div class="diagnosis-card-text">
+                    <span class="diagnosis-card-title">不要</span>
+                    <span class="diagnosis-card-desc">住所利用のみでOK</span>
+                  </div>
+                </button>
               </div>
             </div>
           </div>
           <!-- Result -->
           <div id="diagnosis-result" class="hidden">
-            <p class="text-sm text-blue-600 font-medium mb-2">あなたにおすすめ</p>
-            <p id="diagnosis-service" class="text-xl font-bold text-gray-900 mb-2"></p>
-            <p id="diagnosis-reason" class="text-sm text-gray-500 mb-4"></p>
-            <a id="diagnosis-link" href="" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 font-medium">
-              詳しく見る →
-            </a>
-            <button id="diagnosis-reset" class="block mx-auto mt-4 text-xs text-gray-400 hover:text-gray-600">もう一度診断する</button>
+            <div class="text-center mb-6">
+              <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-3">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <p class="text-sm text-green-600 font-semibold mb-1">診断結果</p>
+              <p class="text-sm text-gray-500">あなたにおすすめのサービスはこちら</p>
+            </div>
+            <!-- Primary recommendation -->
+            <div class="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-200 p-5 mb-4">
+              <span class="absolute -top-3 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">BEST MATCH</span>
+              <div class="mt-1">
+                <p id="diagnosis-service" class="text-xl font-bold text-gray-900 mb-1"></p>
+                <p id="diagnosis-price" class="text-sm text-blue-600 font-semibold mb-3"></p>
+                <div id="diagnosis-features" class="flex flex-wrap gap-2 mb-3"></div>
+                <p id="diagnosis-reason" class="text-sm text-gray-600 leading-relaxed mb-4"></p>
+                <a id="diagnosis-link" href="" class="inline-flex items-center justify-center w-full px-5 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+                  詳しく見る
+                  <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </a>
+              </div>
+            </div>
+            <!-- Secondary recommendation -->
+            <div class="bg-gray-50 rounded-xl border border-gray-200 p-4 mb-5">
+              <p class="text-xs text-gray-400 font-semibold mb-2">こちらもおすすめ</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p id="diagnosis-sub-service" class="text-sm font-bold text-gray-900"></p>
+                  <p id="diagnosis-sub-reason" class="text-xs text-gray-500 mt-0.5"></p>
+                </div>
+                <a id="diagnosis-sub-link" href="" class="shrink-0 text-xs text-blue-600 hover:text-blue-800 font-medium ml-3">
+                  詳しく &rarr;
+                </a>
+              </div>
+            </div>
+            <button id="diagnosis-reset" class="flex items-center justify-center gap-1.5 mx-auto text-sm text-gray-400 hover:text-blue-600 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              もう一度診断する
+            </button>
           </div>
         </div>
       </div>
@@ -265,19 +387,107 @@ const services = [
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
-  .diagnosis-btn {
-    padding: 0.625rem 1rem;
+  .diagnosis-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
     border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    color: #374151;
+    border-radius: 0.75rem;
     text-align: left;
-    transition: all 0.15s;
+    transition: all 0.2s;
+    background: white;
+    cursor: pointer;
   }
-  .diagnosis-btn:hover {
+  .diagnosis-card:hover {
     border-color: #93c5fd;
-    background-color: #eff6ff;
+    background: #eff6ff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+  }
+  .diagnosis-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    background: #eff6ff;
     color: #2563eb;
+    flex-shrink: 0;
+  }
+  .diagnosis-card:hover .diagnosis-card-icon {
+    background: #dbeafe;
+  }
+  .diagnosis-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+  .diagnosis-card-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+  }
+  .diagnosis-card-desc {
+    font-size: 0.75rem;
+    color: #9ca3af;
+  }
+  .progress-dot {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #e5e7eb;
+    color: #9ca3af;
+    transition: all 0.3s;
+  }
+  .progress-dot.active {
+    background: #2563eb;
+    color: white;
+  }
+  .progress-dot.done {
+    background: #22c55e;
+    color: white;
+  }
+  .progress-line {
+    width: 3rem;
+    height: 2px;
+    background: #e5e7eb;
+    transition: background 0.3s;
+  }
+  .progress-line.done {
+    background: #22c55e;
+  }
+  .diagnosis-step {
+    animation: fadeSlideIn 0.3s ease-out;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  #diagnosis-result:not(.hidden) {
+    animation: fadeScaleIn 0.4s ease-out;
+  }
+  @keyframes fadeScaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .feature-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
   }
   .hero-title {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
@@ -290,18 +500,132 @@ const services = [
   const resultEl = document.getElementById('diagnosis-result');
   const questionsEl = document.getElementById('diagnosis-questions');
 
-  document.querySelectorAll('.diagnosis-btn').forEach((btn) => {
+  interface ServiceInfo {
+    name: string;
+    price: string;
+    features: string[];
+    link: string;
+  }
+
+  const serviceData: Record<string, ServiceInfo> = {
+    gmo: {
+      name: 'GMOオフィスサポート',
+      price: '月額660円〜',
+      features: ['法人登記対応', '郵便転送あり', '初期費用0円'],
+      link: '/blog/gmo-office-support-review',
+    },
+    resonance: {
+      name: 'レゾナンス',
+      price: '月額990円〜',
+      features: ['港区住所', '法人登記対応', '郵便転送充実'],
+      link: '/blog/gmo-vs-resonance',
+    },
+    nawabari: {
+      name: 'NAWABARI',
+      price: '月額1,100円〜',
+      features: ['特商法対策', 'EC向け', 'プライバシー重視'],
+      link: '/blog/virtual-office-netshop',
+    },
+    dmm: {
+      name: 'DMMバーチャルオフィス',
+      price: '月額660円〜',
+      features: ['渋谷・銀座住所', 'DMMブランド', 'AI転送通知'],
+      link: '/blog/virtual-office-tokyo',
+    },
+    onestop: {
+      name: 'ワンストップビジネスセンター',
+      price: '月額5,280円〜',
+      features: ['会議室あり', '全国40拠点', '電話秘書対応'],
+      link: '/blog/virtual-office-osusume',
+    },
+  };
+
+  function getRecommendation() {
+    const { purpose, budget, mail } = answers;
+    let primary = 'gmo', secondary = 'resonance', reason = '', subReason = '';
+
+    if (purpose === 'registration') {
+      if (budget === 'low') {
+        primary = 'gmo'; secondary = 'dmm';
+        reason = '月額660円〜で法人登記に対応し、初期費用も無料。コスパ最強の安心サービスです。';
+        subReason = '同価格帯で渋谷・銀座の住所が使える';
+      } else if (budget === 'mid') {
+        primary = mail === 'yes' ? 'resonance' : 'dmm';
+        secondary = mail === 'yes' ? 'gmo' : 'resonance';
+        reason = mail === 'yes'
+          ? '港区住所＋充実の郵便転送サービス。法人登記と郵便管理を両立できます。'
+          : '渋谷・銀座の住所で法人登記。DMMの信頼感で取引先にも好印象。';
+        subReason = mail === 'yes' ? '最安クラスでコストを抑えたいなら' : '港区住所＋郵便転送も充実';
+      } else {
+        primary = 'onestop'; secondary = 'resonance';
+        reason = '全国40拠点＋会議室＋電話秘書。法人登記はもちろん、ビジネスの総合拠点として活用できます。';
+        subReason = 'コスパ重視なら港区住所の老舗';
+      }
+    } else if (purpose === 'privacy') {
+      if (budget === 'low') {
+        primary = 'gmo'; secondary = 'dmm';
+        reason = '月額660円〜で自宅住所を公開せずに済みます。初期費用無料で気軽に始められます。';
+        subReason = '渋谷・銀座住所でブランド力もプラス';
+      } else {
+        primary = 'nawabari'; secondary = 'gmo';
+        reason = 'ネットショップの特商法対策に特化。自宅住所を確実に守りたい方に最適なサービスです。';
+        subReason = 'コスパ重視なら業界最安クラス';
+      }
+    } else if (purpose === 'branding') {
+      if (budget === 'high') {
+        primary = 'onestop'; secondary = 'dmm';
+        reason = '全国の一等地住所＋会議室で、取引先との打ち合わせまでカバー。本格的なビジネス拠点に。';
+        subReason = '渋谷・銀座住所をリーズナブルに';
+      } else {
+        primary = 'dmm'; secondary = 'resonance';
+        reason = '渋谷・銀座など一等地の住所が月額660円〜。大手DMMの安心感で信頼度もアップします。';
+        subReason = '港区住所＋郵便転送の充実度なら';
+      }
+    } else {
+      if (budget === 'low') {
+        primary = 'gmo'; secondary = 'dmm';
+        reason = '法人登記・郵便転送・住所利用がすべて揃って月額660円〜。迷ったらまずここから。';
+        subReason = '渋谷・銀座住所でブランド力も';
+      } else if (budget === 'mid') {
+        primary = mail === 'yes' ? 'resonance' : 'dmm';
+        secondary = mail === 'yes' ? 'dmm' : 'resonance';
+        reason = mail === 'yes'
+          ? '港区住所＋充実の郵便転送。住所利用から郵便管理まで総合的にカバーします。'
+          : '渋谷・銀座住所＋AI転送通知。コスパと機能のバランスが絶妙です。';
+        subReason = mail === 'yes' ? '渋谷・銀座住所で一等地ブランド' : '港区住所＋郵便転送の充実度';
+      } else {
+        primary = 'onestop'; secondary = 'resonance';
+        reason = '住所・郵便転送・電話秘書・会議室まで全部入り。ビジネスのすべてをワンストップで。';
+        subReason = 'コスパ重視なら港区住所の老舗';
+      }
+    }
+
+    return { primary, secondary, reason, subReason };
+  }
+
+  document.querySelectorAll('.diagnosis-card').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const q = (btn as HTMLElement).dataset.q!;
-      const v = (btn as HTMLElement).dataset.v!;
+      const el = btn as HTMLElement;
+      const q = el.dataset.q!;
+      const v = el.dataset.v!;
       answers[q] = v;
 
-      const currentStep = (btn as HTMLElement).closest('.diagnosis-step') as HTMLElement;
-      const nextStep = currentStep.nextElementSibling as HTMLElement | null;
+      const currentStep = el.closest('.diagnosis-step') as HTMLElement;
+      const stepNum = parseInt(currentStep.dataset.step!);
 
+      // Update progress
+      const dot = document.querySelector(`.progress-dot[data-dot="${stepNum}"]`);
+      dot?.classList.remove('active');
+      dot?.classList.add('done');
+      const line = document.querySelector(`.progress-line[data-line="${stepNum}"]`);
+      line?.classList.add('done');
+
+      const nextStep = currentStep.nextElementSibling as HTMLElement | null;
       if (nextStep && nextStep.classList.contains('diagnosis-step')) {
         currentStep.classList.add('hidden');
         nextStep.classList.remove('hidden');
+        const nextDot = document.querySelector(`.progress-dot[data-dot="${stepNum + 1}"]`);
+        nextDot?.classList.add('active');
       } else {
         showResult();
       }
@@ -309,34 +633,38 @@ const services = [
   });
 
   function showResult() {
+    const progress = document.getElementById('diagnosis-progress');
+    progress?.classList.add('hidden');
     questionsEl!.classList.add('hidden');
     resultEl!.classList.remove('hidden');
 
-    let service = 'GMOオフィスサポート';
-    let reason = '法人登記対応・郵便転送・コスパのバランスが良く、初めての方に最適です。';
-    let link = '/blog/gmo-office-support-review';
+    const { primary, secondary, reason, subReason } = getRecommendation();
+    const p = serviceData[primary];
+    const s = serviceData[secondary];
 
-    if (answers.budget === 'low') {
-      service = 'レゾナンス';
-      reason = '月額990円〜と業界最安クラス。コストを抑えたい方におすすめです。';
-      link = '/blog/gmo-vs-resonance';
-    } else if (answers.purpose === 'privacy') {
-      service = 'NAWABARI';
-      reason = 'ネットショップの特定商取引法対策に強く、住所を隠したい方に最適です。';
-      link = '/blog/virtual-office-netshop';
-    } else if (answers.purpose === 'branding') {
-      service = 'DMMバーチャルオフィス';
-      reason = '渋谷・銀座など一等地の住所が使えて、ブランド力を高められます。';
-      link = '/blog/virtual-office-tokyo';
-    }
-
-    document.getElementById('diagnosis-service')!.textContent = service;
+    document.getElementById('diagnosis-service')!.textContent = p.name;
+    document.getElementById('diagnosis-price')!.textContent = p.price;
     document.getElementById('diagnosis-reason')!.textContent = reason;
-    document.getElementById('diagnosis-link')!.setAttribute('href', link);
+    document.getElementById('diagnosis-link')!.setAttribute('href', p.link);
+
+    const featuresEl = document.getElementById('diagnosis-features')!;
+    featuresEl.innerHTML = p.features.map(f => `<span class="feature-tag">${f}</span>`).join('');
+
+    document.getElementById('diagnosis-sub-service')!.textContent = s.name;
+    document.getElementById('diagnosis-sub-reason')!.textContent = subReason;
+    document.getElementById('diagnosis-sub-link')!.setAttribute('href', s.link);
   }
 
   document.getElementById('diagnosis-reset')?.addEventListener('click', () => {
     Object.keys(answers).forEach((k) => delete answers[k]);
+
+    document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+      dot.classList.remove('active', 'done');
+      if (i === 0) dot.classList.add('active');
+    });
+    document.querySelectorAll('.progress-line').forEach(line => line.classList.remove('done'));
+    document.getElementById('diagnosis-progress')?.classList.remove('hidden');
+
     steps.forEach((s, i) => {
       if (i === 0) s.classList.remove('hidden');
       else s.classList.add('hidden');
