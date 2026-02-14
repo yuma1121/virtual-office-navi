@@ -42,6 +42,10 @@ const posts = allPosts
 <BaseLayout
   title={`${categoryName} | バーチャルオフィスおすすめ比較ナビ`}
   description={`バーチャルオフィスの${categoryName}に関する記事一覧`}
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: categoryName, url: '' },
+  ]}
 >
   <section class="py-12 sm:py-16">
     <div class="container-wide">

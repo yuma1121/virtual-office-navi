@@ -5,6 +5,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout
   title="お問い合わせ | バーチャルオフィスおすすめ比較ナビ"
   description="バーチャルオフィスおすすめ比較ナビへのお問い合わせページです。ご質問・ご意見・掲載内容の修正依頼等はこちらからご連絡ください。"
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: 'お問い合わせ', url: '' },
+  ]}
 >
   <div class="max-w-3xl mx-auto px-4 py-12">
     <h1 class="text-3xl font-bold text-gray-900 mb-8">お問い合わせ</h1>

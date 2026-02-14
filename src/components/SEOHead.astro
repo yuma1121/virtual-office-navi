@@ -8,6 +8,7 @@ export interface Props {
   updatedDate?: Date;
   isArticle?: boolean;
   breadcrumbs?: { name: string; url: string }[];
+  noindex?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   updatedDate,
   isArticle = false,
   breadcrumbs,
+  noindex = false,
 } = Astro.props;
 
 const siteName = 'バーチャルオフィスおすすめ比較ナビ';
@@ -47,6 +49,8 @@ const breadcrumbJsonLd =
     : null;
 
 // JSON-LD structured data
+const logoUrl = new URL('/images/common/vo-hikaku-main-logo.png', Astro.site).href;
+
 const jsonLd = isArticle
   ? {
       '@context': 'https://schema.org',
@@ -58,14 +62,15 @@ const jsonLd = isArticle
       dateModified: updatedDate?.toISOString() || pubDate?.toISOString(),
       author: {
         '@type': 'Organization',
-        name: siteName,
+        name: `${siteName}編集部`,
+        url: new URL('/about', Astro.site).href,
       },
       publisher: {
         '@type': 'Organization',
         name: siteName,
         logo: {
           '@type': 'ImageObject',
-          url: new URL('/images/common/vo-hikaku-main-logo.png', Astro.site).href,
+          url: logoUrl,
         },
       },
       mainEntityOfPage: {
@@ -79,6 +84,14 @@ const jsonLd = isArticle
       name: siteName,
       description: description,
       url: Astro.site?.href,
+      publisher: {
+        '@type': 'Organization',
+        name: siteName,
+        logo: {
+          '@type': 'ImageObject',
+          url: logoUrl,
+        },
+      },
     };
 ---
 
@@ -86,7 +99,10 @@ const jsonLd = isArticle
 <title>{fullTitle}</title>
 <meta name="title" content={fullTitle} />
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta name="format-detection" content="telephone=no" />
 <link rel="canonical" href={resolvedCanonical} />
+<link rel="alternate" type="application/rss+xml" title={`${siteName} RSS`} href="/rss.xml" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={isArticle ? 'article' : 'website'} />

@@ -5,6 +5,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout
   title="運営者情報 | バーチャルオフィスおすすめ比較ナビ"
   description="バーチャルオフィスおすすめ比較ナビの運営者情報ページです。当サイトの運営目的・運営者・お問い合わせ先をご案内します。"
+  breadcrumbs={[
+    { name: 'ホーム', url: '/' },
+    { name: '運営者情報', url: '' },
+  ]}
 >
   <div class="max-w-3xl mx-auto px-4 py-12">
     <h1 class="text-3xl font-bold text-gray-900 mb-8">運営者情報</h1>
