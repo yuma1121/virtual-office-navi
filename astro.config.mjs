@@ -6,6 +6,9 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://virtual-office.site',
   integrations: [sitemap(), tailwind()],
+  build: {
+    inlineStylesheets: 'always',
+  },
   markdown: {
     shikiConfig: {
       theme: 'github-light',
