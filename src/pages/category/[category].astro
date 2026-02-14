@@ -19,14 +19,6 @@ const categoryDescriptions: Record<string, string> = {
   concern: 'バーチャルオフィスに関するよくある疑問や不安を解消します。',
 };
 
-const categoryColors: Record<string, string> = {
-  comparison: 'bg-blue-500',
-  review: 'bg-emerald-500',
-  howto: 'bg-purple-500',
-  area: 'bg-orange-500',
-  concern: 'bg-rose-500',
-};
-
 export async function getStaticPaths() {
   return Object.keys({
     comparison: true,
@@ -90,18 +82,15 @@ const posts = allPosts
             {posts.map((post) => (
               <a
                 href={`/blog/${post.slug}`}
-                class="group block bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-blue-300 hover:shadow-sm transition-all"
+                class="group block bg-white rounded-lg border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all"
               >
-                <div class={`h-1 ${categoryColors[post.data.category] || 'bg-gray-300'}`} />
-                <div class="p-5">
-                  <h3 class="text-base font-semibold text-gray-900 leading-snug group-hover:text-blue-600 transition-colors">
-                    {post.data.title}
-                  </h3>
-                  <p class="mt-2 text-sm text-gray-500 line-clamp-2">{post.data.description}</p>
-                  <time class="block mt-3 text-xs text-gray-400">
-                    {post.data.pubDate.toLocaleDateString('ja-JP')}
-                  </time>
-                </div>
+                <time class="block text-xs text-gray-400 mb-2">
+                  {post.data.pubDate.toLocaleDateString('ja-JP')}
+                </time>
+                <h3 class="text-base font-semibold text-gray-900 leading-snug group-hover:text-blue-600 transition-colors">
+                  {post.data.title}
+                </h3>
+                <p class="mt-2 text-sm text-gray-500 line-clamp-2">{post.data.description}</p>
               </a>
             ))}
           </div>
